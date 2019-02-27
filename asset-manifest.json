@@ -1,14 +1,14 @@
 {
-  "main.css": "/react-todo-list/build/static/css/main.c803a956.chunk.css",
-  "main.js": "/react-todo-list/build/static/js/main.b71d6f17.chunk.js",
-  "main.js.map": "/react-todo-list/build/static/js/main.b71d6f17.chunk.js.map",
-  "runtime~main.js": "/react-todo-list/build/static/js/runtime~main.d27fb056.js",
-  "runtime~main.js.map": "/react-todo-list/build/static/js/runtime~main.d27fb056.js.map",
-  "static/js/2.5bf9b2cd.chunk.js": "/react-todo-list/build/static/js/2.5bf9b2cd.chunk.js",
-  "static/js/2.5bf9b2cd.chunk.js.map": "/react-todo-list/build/static/js/2.5bf9b2cd.chunk.js.map",
-  "index.html": "/react-todo-list/build/index.html",
-  "precache-manifest.553805dfa2bd0d1074dcb200f7ce2451.js": "/react-todo-list/build/precache-manifest.553805dfa2bd0d1074dcb200f7ce2451.js",
-  "service-worker.js": "/react-todo-list/build/service-worker.js",
-  "static/css/main.c803a956.chunk.css.map": "/react-todo-list/build/static/css/main.c803a956.chunk.css.map",
-  "static/media/logo.svg": "/react-todo-list/build/static/media/logo.5d5d9eef.svg"
+  "main.css": "/react-todo-list/static/css/main.c803a956.chunk.css",
+  "main.js": "/react-todo-list/static/js/main.cab0bd24.chunk.js",
+  "main.js.map": "/react-todo-list/static/js/main.cab0bd24.chunk.js.map",
+  "runtime~main.js": "/react-todo-list/static/js/runtime~main.14e46cb4.js",
+  "runtime~main.js.map": "/react-todo-list/static/js/runtime~main.14e46cb4.js.map",
+  "static/js/2.5bf9b2cd.chunk.js": "/react-todo-list/static/js/2.5bf9b2cd.chunk.js",
+  "static/js/2.5bf9b2cd.chunk.js.map": "/react-todo-list/static/js/2.5bf9b2cd.chunk.js.map",
+  "index.html": "/react-todo-list/index.html",
+  "precache-manifest.330046d884543324e16889250d8002a3.js": "/react-todo-list/precache-manifest.330046d884543324e16889250d8002a3.js",
+  "service-worker.js": "/react-todo-list/service-worker.js",
+  "static/css/main.c803a956.chunk.css.map": "/react-todo-list/static/css/main.c803a956.chunk.css.map",
+  "static/media/logo.svg": "/react-todo-list/static/media/logo.5d5d9eef.svg"
 }
