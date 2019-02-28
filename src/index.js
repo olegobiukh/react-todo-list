@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Todo from "./Todo";
+import TodoApp from "./TodoApp";
 
 import "./styles.css";
 
@@ -15,7 +15,8 @@ class App extends React.Component {
     checkedItems: [],
     all: true,
     allItems: [],
-    uniqueIds: []
+    uniqueIds: [],
+    filterValue: ""
   };
 
   remove = (array, element) => {
@@ -24,24 +25,24 @@ class App extends React.Component {
 
   gatherNew = (todos, element) => {
     return todos.filter(todo => {
-      return todo.value !== element;
+      return todo.id !== element;
     });
   };
 
-  findWithProp = (array, attr, value) => {
+  findWithProp = (array, attr, id) => {
     for (let i = 0; i < array.length; i += 1) {
-      if (array[i][attr] === value) {
+      if (array[i][attr] === id) {
         return i;
       }
     }
     return -1;
   };
 
-  handleItemSelection = value => {
+  handleItemSelection = id => {
     const updatedTodos = [...this.state.todos];
     const updatedAll = [...this.state.allItems];
 
-    let theTodo = this.findWithProp(updatedTodos, "value", +value);
+    let theTodo = this.findWithProp(updatedTodos, "id", +id);
     const isDone = this.state.todos[theTodo].done;
     const { active, checkedItems, todos } = this.state;
 
@@ -85,7 +86,7 @@ class App extends React.Component {
 
     if (newItemText) {
       let newTodo = {
-        value: uniqueId,
+        id: uniqueId,
         text: newItemText,
         done: false
       };
@@ -117,45 +118,45 @@ class App extends React.Component {
     });
   };
 
-  handleAll = () => {
-    this.setState(({ checkedItems, active }) => {
-      return {
-        todos: [...checkedItems, ...active]
-      };
-    });
+  handleFIlterChange = filterValue => {
+    this.setState({ filterValue });
   };
 
-  handleActive = () => {
-    this.setState(({ active }) => {
-      return {
-        todos: active
-      };
-    });
-  };
-
-  handleCompleted = () => {
-    this.setState(({ checkedItems }) => {
-      return {
-        todos: checkedItems
-      };
-    });
-  };
-
-  handleCleanCompleted = () => {
-    this.setState(({ active }) => {
-      return {
-        todos: active,
-        checkedItems: []
-      };
-    });
+  handleFilterItems = (items, filterValue) => {
+    if (filterValue === "all") {
+      this.setState(({ checkedItems, active }) => {
+        return {
+          todos: [...checkedItems, ...active]
+        };
+      });
+    } else if (filterValue === "active") {
+      this.setState(({ active }) => {
+        return {
+          todos: active
+        };
+      });
+    } else if (filterValue === "completed") {
+      this.setState(({ checkedItems }) => {
+        return {
+          todos: checkedItems
+        };
+      });
+    } else if (filterValue === "clean") {
+      this.setState(({ active }) => {
+        return {
+          todos: active,
+          checkedItems: []
+        };
+      });
+    }
   };
 
   render() {
-    const { uniqueId, todos, newItemText } = this.state;
+    const { uniqueId, todos, newItemText, filterValue } = this.state;
 
     return (
       <div className="App">
-        <Todo
+        <TodoApp
           newItemText={newItemText}
           todos={todos}
           uniqueId={uniqueId}
@@ -167,6 +168,9 @@ class App extends React.Component {
           onItemsActive={this.handleActive}
           onItemsCompleted={this.handleCompleted}
           onCleanCompleted={this.handleCleanCompleted}
+          changeFIlter={this.handleFIlterChange}
+          filterValue={filterValue}
+          filterItems={this.handleFilterItems}
         />
       </div>
     );
