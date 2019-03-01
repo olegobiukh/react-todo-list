@@ -6,30 +6,31 @@
 .App {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-size: 20px;
-  text-align: center;
 }
 
 .Todo {
-  width: 300px;
+  width: 350px;
   padding-top: 20px;
   padding-bottom: 20px;
   background-color: #6e9cfff1;
 }
 
-.Todo__list {
-  display: inline-block;
-  list-style-type: none;
-  margin-left: 0;
+.Todo-center {
+  text-align: center;
+}
 
-  text-align: left;
+.Todo__list {
+  display: block;
+  list-style-type: none;
+  padding-left: 40px;
 }
 
 .Todo__Item-checked {
   text-decoration: line-through;
-  color: #c3c3c3;
+  color: #666768;
 }
 
-.Todo__new-item-text {
+.Todo__input {
   padding: 5px 10px 5px;
 }
 
@@ -55,7 +56,7 @@
 }
 
 .Todo__completed-button {
-  background-color: #a12b23;
+  background-color: #8e7875;
 }
 
 .Todo__clean-button {
@@ -66,49 +67,48 @@
   background-color: rgb(110, 9, 241);
 }
 
+.Todo__archived-button {
+  background-color: #afa695;
+}
+
 .Todo__add-button {
   background-color: rgb(46, 48, 209);
 }
 
-p {
+.Todo__items-left {
   margin-top: 20px;
 }
 
 /*checkbox*/
-.checkbox-custom {
-  opacity: 0;
-  position: absolute;
+label {
+  display: block;
+}
+label > input[type="checkbox"] {
+  visibility: hidden;
 }
 
-.checkbox-custom,
-.checkbox-custom-label {
-  display: inline-block;
-  vertical-align: middle;
-  margin: 5px;
+label > input + span {
   cursor: pointer;
 }
 
-.checkbox-custom-label {
-  position: relative;
-}
-
-.checkbox-custom + .checkbox-custom-label:before {
-  content: "";
-  background: #fff;
-  border: 2px solid #ddd;
+.check {
   display: inline-block;
   vertical-align: middle;
-  width: 20px;
-  height: 20px;
-  padding: 2px;
-  margin-right: 10px;
 }
 
-.checkbox-custom:checked + .checkbox-custom-label:before {
-  background: rebeccapurple;
-  color: #fff;
+label > span.check {
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+  background-color: #fff;
+  border: 1px solid black;
 }
 
-.checkbox-custom:focus + .checkbox-custom-label {
-  outline: 1px solid #ddd; /* focus style */
+label > input[type="checkbox"]:checked + .check:before {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  content: "";
+  background: url("http://cdn.flaticon.com/png/32/60731.png") no-repeat 2px 0px;
+  background-size: 100%;
 }

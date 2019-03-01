@@ -4,7 +4,7 @@ const Input = ({ newItemText, onNewItemTextChange, onItemAdded }) => (
   <>
     <input
       type="text"
-      className="Todo__new-item-text"
+      className="Todo__input"
       value={newItemText}
       onChange={event => {
         onNewItemTextChange(event.target.value);

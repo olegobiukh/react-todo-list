@@ -6,51 +6,59 @@ import Toolbar from "./components/Toolbar";
 const TodoApp = ({
   todos,
   newItemText,
-  children,
   onItemSelected,
   onItemAdded,
   onNewItemTextChange,
   onItemsArchive,
-  onItemsAll,
-  onItemsActive,
-  onItemsCompleted,
-  onCleanCompleted,
+  onCleanArchived,
   uniqueId,
-
   changeFIlter,
   filterValue,
-  filterItems
+  filterItems,
+  archiveItems
 }) => {
-  const handleItemClick = value => {
-    onItemSelected(value);
+  const handleItemClick = id => {
+    onItemSelected(id);
+  };
+
+  const handleItemsLeft = items => {
+    const itemsLeft = items.filter(item => {
+      return item.done === false;
+    });
+    return itemsLeft.length;
   };
 
   return (
     <div className="Todo">
-      <h2 className="Todo__title">My Todo</h2>
-      <button
-        className="Todo__archive-button btn"
-        onClick={() => onItemsArchive()}
-      >
-        Archive
-      </button>
-      <br />
+      <div className="Todo-center">
+        <h2 className="Todo__title">My Todo</h2>
+        <button
+          className="Todo__archive-button btn"
+          onClick={() => onItemsArchive()}
+        >
+          Archive
+        </button>
+      </div>
       <List
         todos={todos}
+        archiveItems={archiveItems}
         filterValue={filterValue}
         onChange={handleItemClick}
         filterItems={filterItems}
       />
+      <div className="Todo-center">
+        <Input
+          newItemText={newItemText}
+          onNewItemTextChange={onNewItemTextChange}
+          onItemAdded={onItemAdded}
+        />
+        <Toolbar
+          changeFIlter={changeFIlter}
+          onCleanArchived={onCleanArchived}
+        />
 
-      <br />
-      <Input
-        newItemText={newItemText}
-        onNewItemTextChange={onNewItemTextChange}
-        onItemAdded={onItemAdded}
-      />
-      <br />
-      <Toolbar changeFIlter={changeFIlter} />
-      <p>{todos.length} has left</p>
+        <p className="Todo__items-left">{handleItemsLeft(todos)} has left</p>
+      </div>
     </div>
   );
 };

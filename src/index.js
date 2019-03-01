@@ -7,26 +7,10 @@ import "./styles.css";
 class App extends React.Component {
   state = {
     todos: [],
-    checkedtodos: [],
+    archiveItems: [],
     newItemText: "",
-    oldItems: [],
     uniqueId: 0,
-    active: [],
-    checkedItems: [],
-    all: true,
-    allItems: [],
-    uniqueIds: [],
     filterValue: ""
-  };
-
-  remove = (array, element) => {
-    array.splice(element, 1);
-  };
-
-  gatherNew = (todos, element) => {
-    return todos.filter(todo => {
-      return todo.id !== element;
-    });
   };
 
   findWithProp = (array, attr, id) => {
@@ -40,49 +24,24 @@ class App extends React.Component {
 
   handleItemSelection = id => {
     const updatedTodos = [...this.state.todos];
-    const updatedAll = [...this.state.allItems];
 
     let theTodo = this.findWithProp(updatedTodos, "id", +id);
     const isDone = this.state.todos[theTodo].done;
-    const { active, checkedItems, todos } = this.state;
 
     updatedTodos[theTodo] = {
       ...updatedTodos[theTodo],
       done: !isDone
     };
 
-    updatedAll[theTodo] = {
-      ...updatedAll[theTodo],
-      done: !isDone
-    };
-
-    if (!isDone) {
-      checkedItems.push(updatedTodos[theTodo]);
-      this.remove(active, theTodo);
-    } else {
-      this.remove(checkedItems, theTodo);
-      active.push(updatedTodos[theTodo]);
-    }
-
     this.setState({
-      todos: updatedTodos,
-      checkedItems,
-      active,
-      allItems: updatedAll
+      todos: updatedTodos
     });
   };
 
   handleItemAdded = () => {
-    let {
-      active,
-      uniqueId,
-      todos,
-      newItemText,
-      allItems,
-      uniqueIds
-    } = this.state;
+    let { uniqueId, newItemText } = this.state;
 
-    uniqueId = uniqueId + Math.floor(Math.random() * 100);
+    uniqueId += Math.floor(Math.random() * 100);
 
     if (newItemText) {
       let newTodo = {
@@ -91,14 +50,11 @@ class App extends React.Component {
         done: false
       };
 
-      this.setState(({ uniqueIds }) => {
+      this.setState(({ todos }) => {
         return {
           todos: [...todos, newTodo],
           newItemText: "",
-          uniqueIds: [...uniqueIds, uniqueId],
-          uniqueId: uniqueId,
-          active: [...active, newTodo],
-          allItems: [...allItems, newTodo]
+          uniqueId: uniqueId
         };
       });
     }
@@ -111,9 +67,19 @@ class App extends React.Component {
   };
 
   handleItemsArchive = () => {
-    this.setState(({ active }) => {
+    const { todos } = this.state;
+    const newArchivedItems = todos.filter(item => {
+      return item.done === true;
+    });
+
+    const newItems = todos.filter(item => {
+      return item.done === false;
+    });
+
+    this.setState(({ archiveItems }) => {
       return {
-        todos: active
+        todos: newItems,
+        archiveItems: [...archiveItems, ...newArchivedItems]
       };
     });
   };
@@ -122,52 +88,33 @@ class App extends React.Component {
     this.setState({ filterValue });
   };
 
-  handleFilterItems = (items, filterValue) => {
-    if (filterValue === "all") {
-      this.setState(({ checkedItems, active }) => {
-        return {
-          todos: [...checkedItems, ...active]
-        };
-      });
-    } else if (filterValue === "active") {
-      this.setState(({ active }) => {
-        return {
-          todos: active
-        };
-      });
-    } else if (filterValue === "completed") {
-      this.setState(({ checkedItems }) => {
-        return {
-          todos: checkedItems
-        };
-      });
-    } else if (filterValue === "clean") {
-      this.setState(({ active }) => {
-        return {
-          todos: active,
-          checkedItems: []
-        };
-      });
-    }
+  handleCleanArchive = () => {
+    this.setState({
+      archiveItems: []
+    });
   };
 
   render() {
-    const { uniqueId, todos, newItemText, filterValue } = this.state;
+    const {
+      uniqueId,
+      todos,
+      archiveItems,
+      newItemText,
+      filterValue
+    } = this.state;
 
     return (
       <div className="App">
         <TodoApp
-          newItemText={newItemText}
           todos={todos}
-          uniqueId={uniqueId}
+          archiveItems={archiveItems}
+          newItemText={newItemText}
           onItemSelected={this.handleItemSelection}
           onItemAdded={this.handleItemAdded}
-          onItemsArchive={this.handleItemsArchive}
           onNewItemTextChange={this.handleNewItemTextChange}
-          onItemsAll={this.handleAll}
-          onItemsActive={this.handleActive}
-          onItemsCompleted={this.handleCompleted}
-          onCleanCompleted={this.handleCleanCompleted}
+          onItemsArchive={this.handleItemsArchive}
+          onCleanArchived={this.handleCleanArchive}
+          uniqueId={uniqueId}
           changeFIlter={this.handleFIlterChange}
           filterValue={filterValue}
           filterItems={this.handleFilterItems}
