@@ -1,0 +1,120 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  padding-top: 50px;
+  background-color: rgba(133, 126, 126, 0.32);
+}
+
+.App {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 20px;
+}
+
+.Todo {
+  width: 350px;
+  margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: #6e9cfff1;
+}
+
+.Todo-center {
+  text-align: center;
+}
+
+.Todo__list {
+  display: block;
+  list-style-type: none;
+  padding-left: 40px;
+}
+
+.Todo__Item-checked {
+  text-decoration: line-through;
+  color: #666768;
+}
+
+.Todo__input {
+  padding: 5px 10px 5px;
+}
+
+.btn {
+  font-size: 0.8em;
+  margin: 5px 2px 3px 7px;
+  padding: 7px 12px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #a12358;
+}
+
+.Todo__active-button {
+  background-color: #23a157;
+}
+
+.Todo__all-button {
+  background-color: #c7590f;
+}
+
+.Todo__completed-button {
+  background-color: #8e7875;
+}
+
+.Todo__clean-button {
+  background-color: #241f1f8f;
+}
+
+.Todo__archive-button {
+  background-color: rgb(110, 9, 241);
+}
+
+.Todo__archived-button {
+  background-color: #afa695;
+}
+
+.Todo__add-button {
+  background-color: rgb(46, 48, 209);
+}
+
+.Todo__items-left {
+  margin-top: 20px;
+}
+
+/*checkbox*/
+label {
+  display: block;
+}
+label > input[type="checkbox"] {
+  visibility: hidden;
+}
+
+label > input + span {
+  cursor: pointer;
+}
+
+.check {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+label > span.check {
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+  background-color: #fff;
+  border: 1px solid black;
+}
+
+label > input[type="checkbox"]:checked + .check:before {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  content: "";
+  background: url("http://cdn.flaticon.com/png/32/60731.png") no-repeat 2px 0px;
+  background-size: 100%;
+}
